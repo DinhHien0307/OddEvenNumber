@@ -46,7 +46,6 @@ class EvenOddPrimeNumber
         }
         return true;
     }
-
     private function checkValueNumber($number)
     {
         if ($number < 0) {
@@ -57,7 +56,13 @@ class EvenOddPrimeNumber
             throw new InvalidArgumentException("should be a number");
         }
     }
-
+/**
+ * function determine number to Odd Even Prime in range $min to $max
+ * 
+ * @param $min, $max
+ * 
+ * @return array [];
+ */
     public function determineNumberInRange($min, $max)
     {
         $result = array();
