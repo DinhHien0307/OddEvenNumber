@@ -7,6 +7,7 @@ class EvenOddPrimeNumber
     const CONDITION = 2;
     public function determineNumber($number)
     {
+        $this->checkValueNumber($number);
         if ($this->isPrimeNumber($number)) {
             return $number;
         }
@@ -46,12 +47,22 @@ class EvenOddPrimeNumber
         return true;
     }
 
-    private $min;
-    private $max;
+    private function checkValueNumber($number)
+    {
+        if ($number < 0) {
+            throw new InvalidArgumentException("should be not negative number");
+        }
+
+        if (!is_numeric($number)) {
+            throw new InvalidArgumentException("should be a number");
+        }
+    }
+
     public function determineNumberInRange($min, $max)
     {
         $result = array();
-        // $this->checkValueNumber($max);
+        $this->checkValueNumber($min);
+        $this->checkValueNumber($max);
         $arrayNumbers = range($min, $max);
         foreach ($arrayNumbers as $number) {
             $result[] = $this->determineNumber($number);
@@ -61,4 +72,4 @@ class EvenOddPrimeNumber
 }
 //debug
 // $x = new EvenOddPrimeNumber;
-// $x->determineNumberInRange(41,50);
+// $x->determineNumberInRange(51,50);

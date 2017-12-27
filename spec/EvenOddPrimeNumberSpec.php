@@ -5,6 +5,7 @@ namespace spec;
 use EvenOddPrimeNumber;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SebastianBergmann\ObjectReflector\InvalidArgumentException;
 
 class EvenOddPrimeNumberSpec extends ObjectBehavior
 {
@@ -69,5 +70,29 @@ class EvenOddPrimeNumberSpec extends ObjectBehavior
     {
         $this->determineNumberInRange(41, 50)->shouldBe([41,self::EVEN,43,self::EVEN,self::ODD,self::EVEN,47,self::EVEN,self::ODD,self::EVEN]);
     }
-    
+   
+    public function it_should_be_array_in_range_5_1()
+    {
+        $this->determineNumberInRange(5, 1)->shouldBe([5,self::EVEN,3,2,self::ODD]);
+    }
+
+    public function it_throw_exception()
+    {
+        $this->shouldThrow(new \InvalidArgumentException("should be not negative number"))->duringDetermineNumber(-1);
+    }
+
+    public function it_throw_exception_1()
+    {
+        $this->shouldThrow(new \InvalidArgumentException("should be a number"))->duringDetermineNumber("A");
+    }
+
+    public function it_throw_exception_2()
+    {
+        $this->shouldThrow(new \InvalidArgumentException("should be not negative number"))->duringDetermineNumberInRange(-1,2);
+    }
+
+    public function it_throw_exception_3()
+    {
+        $this->shouldThrow(new \InvalidArgumentException("should be a number"))->duringDetermineNumberInRange("A","B");
+    }
 }
